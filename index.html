@@ -338,6 +338,115 @@
     z-index: 1;
     opacity: 0.9;
         }
+        /* Container Utama Laut */
+.ocean {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%; /* Mengatur tinggi laut */
+    background: linear-gradient(to bottom, #020111 0%, #001a33 100%);
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* Efek Gelombang */
+.wave {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/davidkpiano/framer-motion-layout-animations/master/public/wave.svg'); /* Menggunakan SVG gelombang standar */
+    background-repeat: repeat-x;
+    background-size: 50% 60px;
+    opacity: 0.3;
+    animation: waveMove 10s linear infinite;
+}
+
+.wave:nth-child(2) {
+    top: -20px;
+    opacity: 0.2;
+    animation: waveMove 15s linear infinite reverse;
+    filter: brightness(1.2);
+}
+
+@keyframes waveMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Pantulan Bintang di Air */
+.reflection-container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.star-reflection {
+    position: absolute;
+    background: white;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 8px 1px white;
+    opacity: 0.4;
+    animation: shimmer 3s infinite ease-in-out;
+}
+
+/* Posisi acak pantulan bintang */
+.s1-ref { top: 10%; left: 30%; animation-delay: 0s; }
+.s2-ref { top: 30%; left: 70%; animation-delay: 1s; }
+.s3-ref { top: 20%; left: 50%; animation-delay: 2s; }
+
+@keyframes shimmer {
+    0%, 100% { transform: scale(1) translateX(0); opacity: 0.3; }
+    50% { transform: scale(1.5) translateX(10px); opacity: 0.6; }
+}
+
+/* Penyesuaian agar teks tetap terbaca di atas laut */
+.page {
+    z-index: 5; /* Pastikan teks di atas laut */
+}
+    /* Pantulan Bulan di Air */
+.moon-reflection {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px; /* Lebar pendaran cahaya */
+    height: 100%;
+    /* Gradien putih transparan yang memanjang ke bawah */
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    filter: blur(15px);
+    opacity: 0.8;
+    animation: moonGlow 4s infinite alternate ease-in-out;
+}
+
+/* Animasi pendaran cahaya bulan agar terasa mengikuti gelombang */
+@keyframes moonGlow {
+    0% {
+        width: 50px;
+        opacity: 0.6;
+        transform: translateX(-50%) skewX(-2deg);
+    }
+    100% {
+        width: 75px;
+        opacity: 0.9;
+        transform: translateX(-50%) skewX(2deg);
+    }
+}
+
+/* Tambahan: Pastikan moon glade ini berada di bawah gelombang sedikit agar terlihat natural */
+.reflection-container {
+    z-index: 3;
+}
         
     </style>
 </head>
@@ -345,6 +454,21 @@
 
     <div id="game-container">
         <div class="stars"></div>
+        <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+            <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="reflection-container">
+        <div class="moon-reflection"></div>
+        
+        <div class="star-reflection s1-ref"></div>
+        <div class="star-reflection s2-ref"></div>
+        <div class="star-reflection s3-ref"></div>
+    </div>
+        </div>
+        
         <div class="moon"></div>
         <div class="shooting-stars">
     <div class="wish"></div>
