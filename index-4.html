@@ -58,6 +58,7 @@
             background-size: 400px 400px;
             opacity: 0.7;
             z-index: 1;
+            animation: moveStars 80s linear infinite;
         }
 
         /* Update CSS untuk Page Transition */
@@ -250,7 +251,7 @@
     box-shadow: 0 0 15px 2px white;
     border-radius: 50%;
     opacity: 0;
-    animation: shooting 4s linear infinite;
+    animation: shooting 4s linear infinite, depth 4s linear infinite;
 }
 
 /* Ekor Bintang Jatuh */
@@ -302,6 +303,7 @@
         radial-gradient(circle at 80% 70%, rgba(255, 0, 150, 0.1), transparent 40%);
     pointer-events: none;
     z-index: 1;
+    animation: moveNebula 40s ease-in-out infinite alternate;
 }
 
 /* Efek Aurora yang diturunkan posisinya agar tidak terpotong */
@@ -320,8 +322,14 @@
 }
 
 @keyframes auroraDance {
-    0% { transform: translateX(-10%) rotate(-5deg); opacity: 0.5; }
-    100% { transform: translateX(10%) rotate(5deg); opacity: 0.9; }
+    0% {
+        transform: translateX(-10%) rotate(-5deg) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(10%) rotate(5deg) scale(1.1);
+        opacity: 0.9;
+    }
 }
         .moon {
     position: absolute;
@@ -338,7 +346,34 @@
     z-index: 1;
     opacity: 0.9;
         }
-        
+        @keyframes moveStars {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-200px);
+    }
+        }
+
+        @keyframes moveNebula {
+    0% {
+        transform: translateX(-5%) translateY(0);
+    }
+    100% {
+        transform: translateX(5%) translateY(20px);
+    }
+        }
+        @keyframes depth {
+    0% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.3);
+    }
+        }
     </style>
 </head>
 <body>
