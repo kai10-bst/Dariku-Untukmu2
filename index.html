@@ -71,9 +71,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 30px;
+    padding: 100px 30px 30px 30px;
     
     /* State Awal: Ngeblur dan Transparan */
     opacity: 0;
@@ -141,12 +141,13 @@
         .text-left {
             text-align: left;
             width: 100%;
+            margin-top: 10px;
         }
 
         /* Next Button */
         .btn-next {
             position: absolute;
-            bottom: 50px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Montserrat', sans-serif;
